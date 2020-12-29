@@ -1,20 +1,32 @@
 version: "3.4"
 services:
-  app:
+#  app:
+#    build:
+#      context: .
+#    container_name: "Flask-App"
+#    links:
+#      - database
+#    ports:
+#      - 5000:5000
+
+  lighttpd:
     build:
       context: .
-    container_name: "Flask-App"
-    links:
-      - database
+    container_name: "Lighttpd"
+#    links:
+#      - database
+#    volumes:
+#      - ./etc/lighttpd:/etc/lighttpd
     ports:
-      - 5000:5000
+      - "8080:80"
+    tty: true
 
-  database:
-    image: mysql:8.0
-    container_name: "MySQL_Database"
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./database:/docker-entrypoint-initdb.d/:ro
+#  database:
+#    image: mysql:8.0
+#    container_name: "MySQL_Database"
+#    ports:
+#      - 3306:3306
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#    volumes:
+#      - ./database:/docker-entrypoint-initdb.d/:ro

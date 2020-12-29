@@ -3,10 +3,10 @@ USE shippingChallenge;
 
 CREATE TABLE User
 (
-	userId int auto_increment,
-	surname varchar(255) null,
+	userId int not null,
+	surname varchar(255) not null,
 	constraint User_pk
 		primary key (userId)
 );
 
-INSERT INTO User (surname) VALUES ("Robin");
+INSERT INTO User (userId, surname) VALUES (1, "Robin");

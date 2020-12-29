@@ -1,0 +1,28 @@
+FROM alpine
+
+RUN apk add --update \
+  python3 py3-pip
+
+ENV LIGHTTPD_VERSION=1.4.55-r1
+
+RUN apk add --update --no-cache \
+	lighttpd=${LIGHTTPD_VERSION} \
+	lighttpd-mod_auth \
+  && rm -rf /var/cache/apk/*
+
+COPY ./etc/lighttpd/* /etc/lighttpd/
+
+
+EXPOSE 80
+
+WORKDIR /var/www/shippingchallenge
+
+COPY ./requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./ .
+
+RUN chown -R lighttpd:lighttpd /var/www/shippingchallenge
+
+CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
