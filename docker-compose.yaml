@@ -1,22 +1,11 @@
 version: "3.4"
 services:
-#  app:
-#    build:
-#      context: .
-#    container_name: "Flask-App"
-#    links:
-#      - database
-#    ports:
-#      - 5000:5000
-
   lighttpd:
     build:
       context: .
     container_name: "Lighttpd"
     links:
       - database
-#    volumes:
-#      - ./etc/lighttpd:/etc/lighttpd
     ports:
       - "8080:80"
     tty: true
