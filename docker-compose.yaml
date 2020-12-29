@@ -13,20 +13,20 @@ services:
     build:
       context: .
     container_name: "Lighttpd"
-#    links:
-#      - database
+    links:
+      - database
 #    volumes:
 #      - ./etc/lighttpd:/etc/lighttpd
     ports:
       - "8080:80"
     tty: true
 
-#  database:
-#    image: mysql:8.0
-#    container_name: "MySQL_Database"
-#    ports:
-#      - 3306:3306
-#    environment:
-#      MYSQL_ROOT_PASSWORD: root
-#    volumes:
-#      - ./database:/docker-entrypoint-initdb.d/:ro
+  database:
+    image: mysql:8.0
+    container_name: "MySQL_Database"
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/:ro
