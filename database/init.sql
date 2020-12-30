@@ -1,11 +1,11 @@
-CREATE DATABASE shippingChallenge;
-USE shippingChallenge;
+CREATE DATABASE ShippingChallenge;
+USE ShippingChallenge;
 
 CREATE TABLE User
 (
 	userId int not null,
 	surname varchar(255) not null,
-	constraint User_pk
+	constraint User_pk1
 		primary key (userId)
 );
 
