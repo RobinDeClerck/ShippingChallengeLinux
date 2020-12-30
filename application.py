@@ -37,7 +37,7 @@ class index:
         # surname = cursor.fetchone()[0]
 
         # return 'Hi ' + str(surname)
-        return 'Hi ROBIN IT WORKS :)'
+        return 'Hi ROBIN IT WORKS 2 :)'
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
