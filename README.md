@@ -1,6 +1,6 @@
 # Linux Shipping Challenge
 
-##Assignment
+## Assignment
 * Create your own kubernetes stack with 1 worker
 * Containerized application on worker
   * When surname changes in DB, webpage changes automatically
@@ -8,12 +8,12 @@
   * When layout of webpage changes, the worker will display the new layout automatically
   * Use the webstack which is assigned to you
 
-###My assigned webstack
+### My assigned webstack
 | Webserver | Database | Script Language |
 | ------------- |:-------------:| -----:|
 | Lighttpd | MySQL | Python |
 
-###Points
+### Points
 **10/20 - stack in Docker** \
 **14/20 - mk8s cluster with 1 worker**
 
@@ -29,8 +29,8 @@
 * Something else than MK8s with the same purpose
 * (A practical linux joke for docents / a linux koan to enlighten your docents = extra point)
 
-##Installation
-###Create the Python project
+## Installation
+### Create the Python project
 I used the Python package [web.py](https://webpy.org/) to create my Python application.
 I tried to use Flask but Lighttpd's support for Python is old and caused a lot of problems when trying to host the application.
 
@@ -66,7 +66,7 @@ cursor.execute(db_query)
 surname = cursor.fetchone()[0]
 ```
 
-###Dockerfile
+### Dockerfile
 The dockerfile is needed to build and run the application inside a container.
 
 In the dockerfile I write all needed dependencies that need to be installed.
@@ -112,9 +112,8 @@ I put the project online so I (and Kubernetes) can download the project on any m
 
 When I push a new version to GitHub, Docker Hub wil automatically create a new version via automated builds.
 
-###Kubernetes
-**Deployment**
-
+### Kubernetes
+**Deployment**\
 This will download the image from Docker Hub `robindeclerck/shippingchallenge` and create 3 pods.
 
 ```Yaml
@@ -140,8 +139,7 @@ spec:
             - containerPort: 80
               name: http
 ```
-**Service**
-
+**Service**\
 The service needs to attach the deployment via selector, app.
 
 ```Yaml
@@ -157,8 +155,8 @@ spec:
   selector:
     app: lighttpd
 ```
-**Ingress**
-
+**Ingress**\
+The Ingress needs to specify the service that needs to be used for the port via 'serviceName' 
 ```Yaml
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
@@ -179,9 +177,12 @@ spec:
               serviceName: shippingchallenge-service
               servicePort: 80
 ```
+You also need to specify 'shippingchallenge.local' in your hosts file: \
+`sudo nano /etc/hosts` and add the ip of the ingress and the host (shippingchallenge.local).
 
+If you just go to the IP of the application you will get a "NGINX ERROR NOT FOUND".
 
-##Ubuntu
+## Ubuntu
 I installed the latest [Ubuntu 20.10](https://ubuntu.com/download/desktop) on my VirtualBox.\
 *Note: Using default 10GB space is not enough for this project*
 
@@ -191,7 +192,7 @@ I installed the latest [Ubuntu 20.10](https://ubuntu.com/download/desktop) on my
 **Install Docker:**\
 https://docs.docker.com/engine/install/ubuntu/
 
-I had a problem where docker did not have permissions to execute containers I found the fix on stackoverflow:
+I had a problem where docker did not have permissions to execute containers I found the fix on stackoverflow (using docker with sudo != ok): \
 https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue
 
 **Install Kubernetes:**\
@@ -200,24 +201,23 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 **Install Minikube (needed for ingress-controller):**\
 https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-minikube/
 
-Start Minikube to install itself:
+**Start Minikube to install itself:** \
 `minikube start`
 
-For the Ingress we need a Ingress controller, otherwise there will no IP added to the Ingress:
-
+For the Ingress we need a Ingress controller, otherwise there will no IP added to the Ingress: \
 ```minikube addons enable ingress```
 
 So the Ingress will get an 'ADDRESS'\
 ![Example](https://cdn.discordapp.com/attachments/668890794882629662/793975308705071104/Capture.PNG)
 
 ---
-After the installation I started the application (the Deployment, Service, Ingress are all in the same file seperated with ---):
+After the installation I started the application (the Deployment, Service, Ingress are all in the same file seperated with ---): \
 `kubectl apply -f deploy.yaml`
 
 The project will install and run after this command. This command is also used when changing the deploy.yaml file
 
 
-##Kubernetes web-ui
+## Kubernetes web-ui
 Install Kubernetes web-ui:
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
@@ -230,7 +230,7 @@ You can access Dashboard using the kubectl command-line tool by running the foll
 To go to the dashboard:\
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/discovery?namespace=default
 
-###Debugging
+### Debugging
 It's possible to debug a kubernetes deployment:\
 `kubectl exec -it shippingchallenge-deployment-844974d48-2sxzf sh`
 
