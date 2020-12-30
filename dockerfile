@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER John Else <john.else@gmail.com>
 
 RUN apt-get update
 RUN apt-get -y install lighttpd
