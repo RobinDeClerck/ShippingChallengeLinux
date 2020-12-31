@@ -1,10 +1,17 @@
+import os
 import web
 
-DATABASE_HOST="database"
-DATABASE_DB="shippingChallenge"
-DATABASE_PORT="3306"
-DATABASE_USER="root"
-DATABASE_PASSWORD="root"
+# ONLY IN DEBUG
+# from dotenv import load_dotenv
+# load_dotenv()
+
+# IMPORT ENV
+DATABASE_HOST = os.getenv("DATABASE_HOST", False)
+DATABASE_DB = os.getenv("DATABASE_DB", False)
+DATABASE_PORT = os.getenv("DATABASE_PORT", False)
+DATABASE_USER = os.getenv("DATABASE_USER", False)
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", False)
+
 
 def setup_database_connection():
     # CONNECTION TO SQL SERVER #
@@ -28,15 +35,15 @@ urls = (
 class index:
     def GET(self):
         # DB Connection
-        # database = setup_database_connection()
-        # cursor = database.cursor()
-        #
-        # db_query = 'SELECT surname FROM User WHERE userId = 1'
-        # cursor.execute(db_query)
-        #
-        # surname = cursor.fetchone()[0]
+        database = setup_database_connection()
+        cursor = database.cursor()
 
-        # return 'Hi ' + str(surname)
+        db_query = 'SELECT surname FROM User WHERE userId = 1'
+        cursor.execute(db_query)
+
+        surname = cursor.fetchone()[0]
+
+        return 'Hi ' + str(surname)
         return 'Hi ROBIN IT WORKS 2 :)'
 
 if __name__ == "__main__":

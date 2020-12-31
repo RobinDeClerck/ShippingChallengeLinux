@@ -16,6 +16,17 @@ spec:
       containers:
         - name: lighttpd
           image: robindeclerck/shippingchallenge
+          env:
+            - name: DATABASE_HOST
+              value: mysql-service
+            - name: DATABASE_PORT
+              value: 3306
+            - name: DATABASE_USER
+              value: root
+            - name: DATABASE_PASSWORD
+              value: root
+            - name: DATABASE_DB
+              value: shippingChallenge
           ports:
             - containerPort: 80
               name: http
