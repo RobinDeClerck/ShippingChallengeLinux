@@ -6,11 +6,11 @@ import web
 # load_dotenv()
 
 # IMPORT ENV
-DATABASE_HOST = os.getenv("DATABASE_HOST", False)
-DATABASE_DB = os.getenv("DATABASE_DB", False)
-DATABASE_PORT = os.getenv("DATABASE_PORT", False)
-DATABASE_USER = os.getenv("DATABASE_USER", False)
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", False)
+DATABASE_HOST = os.getenv("DATABASE_HOST", "mysql-service")
+DATABASE_DB = os.getenv("DATABASE_DB", "shippingChallenge")
+DATABASE_PORT = os.getenv("DATABASE_PORT", "3306")
+DATABASE_USER = os.getenv("DATABASE_USER", "root")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "root")
 
 
 def setup_database_connection():
