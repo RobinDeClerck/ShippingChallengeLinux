@@ -7,7 +7,7 @@ services:
     links:
       - database
     ports:
-      - "80:80"
+      - "81:80"
     tty: true
 
   database:
