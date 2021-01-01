@@ -217,8 +217,8 @@ After the installation I started the application (the Deployment, Service, Ingre
 The project will install and run after this command. This command is also used when changing the deploy.yaml file
 
 
-## Kubernetes web-ui
-Install Kubernetes web-ui:
+## Kubernetes dashboard
+Install Kubernetes dashboard:
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 You will need a user and token for the dashboard:
@@ -232,6 +232,16 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 
 ### Debugging
 It's possible to debug a kubernetes deployment:\
-`kubectl exec -it shippingchallenge-deployment-844974d48-2sxzf sh`
+`kubectl get pods`\
+![Example](https://cdn.discordapp.com/attachments/668890794882629662/794585998033289236/unknown.png)
+
+`kubectl exec -it shippingchallenge-deployment-79998c989c-6jvvq sh`
 
 I used this to check if my service/deployment worked by installing curl and using `curl shippingchallenge-service` to check if my application was running correctly inside Kubernetes
+
+This is also really handy to check your database deployment:\
+![Example](https://cdn.discordapp.com/attachments/668890794882629662/794588040873246770/unknown.png)
+
+To restart a deployment (will also update the image if config default):\
+`kubectl get deployment`\
+`kubectl rollout restart deployment [deployment_name]`

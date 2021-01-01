@@ -34,16 +34,20 @@ urls = (
 
 class index:
     def GET(self):
-        # DB Connection
-        database = setup_database_connection()
-        cursor = database.cursor()
 
-        db_query = 'SELECT surname FROM User WHERE userId = 1'
-        cursor.execute(db_query)
+        try:
+            # DB Connection
+            database = setup_database_connection()
+            cursor = database.cursor()
 
-        surname = cursor.fetchone()[0]
+            db_query = 'SELECT surname FROM User WHERE userId = 1'
+            cursor.execute(db_query)
 
-        return 'Hi ' + str(surname)
+            surname = cursor.fetchone()[0]
+
+            return 'Hi ' + str(surname)
+        except Exception as error:
+            return 'ERROR' + str(error)
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
