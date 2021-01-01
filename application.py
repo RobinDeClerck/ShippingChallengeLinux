@@ -7,7 +7,7 @@ import web
 
 # IMPORT ENV
 DATABASE_HOST = os.getenv("DATABASE_HOST", "mysql-service")
-DATABASE_DB = os.getenv("DATABASE_DB", "shippingChallenge")
+DATABASE_DB = os.getenv("DATABASE_DB", "ShippingChallenge")
 DATABASE_PORT = os.getenv("DATABASE_PORT", "3306")
 DATABASE_USER = os.getenv("DATABASE_USER", "root")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "root")
@@ -34,13 +34,12 @@ urls = (
 
 class index:
     def GET(self):
-
         try:
             # DB Connection
             database = setup_database_connection()
             cursor = database.cursor()
 
-            db_query = 'SELECT surname FROM User WHERE userId = 1'
+            db_query = 'SELECT surname FROM ShippingChallenge.User WHERE userId = 1'
             cursor.execute(db_query)
 
             surname = cursor.fetchone()[0]
