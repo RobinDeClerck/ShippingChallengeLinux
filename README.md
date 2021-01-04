@@ -204,7 +204,7 @@ https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-minikube/
 **Start Minikube to install itself:** \
 `minikube start`
 
-For the Ingress we need a Ingress controller, otherwise there will no IP added to the Ingress: \
+For the Ingress we need an Ingress controller, otherwise there will no IP be added to the Ingress: \
 ```minikube addons enable ingress```
 
 So the Ingress will get an 'ADDRESS'\
@@ -242,6 +242,17 @@ I used this to check if my service/deployment worked by installing curl and usin
 This is also really handy to check your database deployment:\
 ![Example](https://cdn.discordapp.com/attachments/668890794882629662/794588040873246770/unknown.png)
 
-To restart a deployment (will also update the image if config default):\
+#### Change database row
+Login: \
+`$ mysql -u user -p'password'` \
+Show databases: \
+`mysql> SHOW DATABASES;` \
+Insert new row: \
+`mysql> USE ShippingChallenge;` \
+`mysql> SELECT * FROM User;` \
+`mysql> UPDATE User SET surname = "Bob" WHERE userId = 1;`
+
+
+##### To restart a deployment (will also update the image):
 `kubectl get deployment`\
 `kubectl rollout restart deployment [deployment_name]`
