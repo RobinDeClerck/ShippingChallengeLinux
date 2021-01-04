@@ -44,9 +44,23 @@ class index:
 
             surname = cursor.fetchone()[0]
 
-            return 'Hi ' + str(surname)
+            web.header("Content-Type", "text/html")
+            bootstrap = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">'
+            google_font = '<link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">'
+
+            layout = \
+                '<div class="container">' \
+                    '<div class="row">' \
+                        '<p class="text-center mt-5 display-4" style="font-family:Open Sans, sans-serif;">Hi ' + str(surname) + '</p>' \
+                        '<div class="text-center">' \
+                            '<img src="https://cdn.discordapp.com/attachments/668890794882629662/795444478797545492/linux.jpg" alt="Linux Joke">' \
+                        '</div>' \
+                    '</div>' \
+                '</div>'
+
+            return bootstrap + google_font + layout
         except Exception as error:
-            return 'ERROR' + str(error)
+            return "Error: " + str(error)
 
 if __name__ == "__main__":
     app = web.application(urls, globals())
