@@ -51,7 +51,7 @@ class index:
             layout = \
                 '<div class="container">' \
                     '<div class="row">' \
-                        '<p class="text-center mt-5 display-4" style="font-family:Open Sans, sans-serif;">Hi ' + str(surname) + '</p>' \
+                        '<p class="text-center mt-5 display-4" style="font-family:Open Sans, sans-serif;">Hello ' + str(surname) + '</p>' \
                         '<div class="text-center">' \
                             '<img src="https://cdn.discordapp.com/attachments/668890794882629662/795444478797545492/linux.jpg" alt="Linux Joke">' \
                         '</div>' \
